@@ -28,10 +28,11 @@ Engine::Engine() :
   world("back", Gamedata::getInstance().getXmlInt("back/factor") ),
   world2("back2", Gamedata::getInstance().getXmlInt("back2/factor") ),
   viewport( Viewport::getInstance() ),
-  player(new Player("Naruto")),
   Toad(new Sprite("Toad")),
   Naruto(new TwoWayMultiSprite("Naruto")),
   Jiraya(new MultiSprite("Jiraya")),
+  player(new Player("Naruto")),
+  hud( HUD::getInstance() ),
   currentSprite(0),
   makeVideo( false )
 {
@@ -49,12 +50,9 @@ void Engine::draw() const {
   for(auto step: spriteList){
   step->draw();
   }
-
-  //Toad->draw();
-  //Naruto->draw();
-
   player->draw();
   viewport.draw();
+  hud.draw();
   SDL_RenderPresent(renderer);
 }
 
@@ -62,12 +60,11 @@ void Engine::update(Uint32 ticks) {
   //check for collisions
   player->update(ticks);
   for(auto step: spriteList){
-  step->update(ticks);
+    step->update(ticks);
   }
-  //Toad->update(ticks);
-  //Naruto->update(ticks);
   world.update();
   world2.update();
+  if(clock.getTicks() > 3000) hud.update();
   viewport.update(); // always update viewport last
 }
 
@@ -108,6 +105,9 @@ void Engine::play() {
         }
         if ( keystate[SDL_SCANCODE_T] ) {
           switchSprite();
+        }
+        if (keystate[SDL_SCANCODE_F1]) {
+          hud.setVisible(!(hud.getVisible()));
         }
         if (keystate[SDL_SCANCODE_F4] && !makeVideo) {
           std::cout << "Initiating frame capture" << std::endl;

@@ -23,7 +23,15 @@ void HUD::update(){
 }
 
 void HUD::draw() const {
-  if(visible || initVis){
+  if(visible){
+    //SDL_Rect backgroud = {200,100,50,50};
+    //SDL_SetRenderDrawColor(renderer, 100,100,100,100);
+    //SDL_RenderFillRect(renderer, &background);
+
+    const std::string fpsString = "FPS: " + std::to_string(Clock::getInstance().getFps());
+    IOmod::getInstance().writeText(fpsString, position[0], position[1]);
+  }
+  if(initVis){
     //SDL_Rect backgroud = {200,100,50,50};
     //SDL_SetRenderDrawColor(renderer, 100,100,100,100);
     //SDL_RenderFillRect(renderer, &background);

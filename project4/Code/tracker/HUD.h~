@@ -10,6 +10,7 @@ public:
 
   bool getVisible() { return visible;}
   void setVisible(bool isVisible) {visible = isVisible;}
+  void
   void update();
 
 

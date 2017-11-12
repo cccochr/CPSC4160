@@ -5,6 +5,9 @@
 #include "clock.h"
 #include "world.h"
 #include "viewport.h"
+#include "HUD.h"
+class Player;
+//class CollisionStrategy;
 
 class Engine {
 public:
@@ -28,6 +31,8 @@ private:
   Drawable* Toad;
   Drawable* Naruto;
   Drawable* Jiraya;
+
+  Player* player;
   
   std::vector<Drawable*> spriteList;  
 

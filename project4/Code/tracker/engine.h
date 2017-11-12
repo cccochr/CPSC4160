@@ -5,6 +5,7 @@
 #include "clock.h"
 #include "world.h"
 #include "viewport.h"
+#include "HUD.h"
 class Player;
 //class CollisionStrategy;
 
@@ -32,6 +33,8 @@ private:
   Drawable* Jiraya;
 
   Player* player;
+
+  HUD& hud;
   
   std::vector<Drawable*> spriteList;  
 

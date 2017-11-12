@@ -86,4 +86,11 @@
   <transparency>true</transparency>
 </Toad>
 
+<HUD>
+  <width>300</width>
+  <height>300</height>
+  <X>250</X>
+  <Y>150</Y>
+</HUD>
+
 </GameData>

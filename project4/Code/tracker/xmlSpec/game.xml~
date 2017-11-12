@@ -36,7 +36,7 @@
 <font name="font">
   <file>fonts/arial.ttf</file>
   <size>24</size>
-  <red>255</red>
+  <red>0</red>
   <green>0</green>
   <blue>255</blue>
   <alpha>0</alpha>
@@ -85,5 +85,12 @@
   <speedY>300</speedY>
   <transparency>true</transparency>
 </Toad>
+
+<HUD>
+  <width>300</width>
+  <height>300</height>
+  <X>150</X>
+  <Y>150</Y>
+</HUD>
 
 </GameData>
