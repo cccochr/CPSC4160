@@ -1,0 +1,21 @@
+Name: 
+Chance Cochran (cccochr)
+
+Clemson Email Address: 
+cccochr@clemson.edu
+
+Project no: 
+2
+
+Project due date: 
+9/21/2017
+
+Project description: 
+Drawing with primitives in SDL.
+
+The easiest part of this project:
+This whole thing was pretty easy
+
+Problems that I had in completing this project: 
+Overloading output operator... Getting error about signature not being binary and having 3 parameters.
+Has to be outside of the class. Overloaded output gets warning about unused parameter..... zzzz

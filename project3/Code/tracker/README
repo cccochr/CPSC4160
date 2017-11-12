@@ -1,0 +1,24 @@
+Name: Chance Cochran
+
+Course: CPSC 4160
+
+Clemson Email Address: cccochr
+
+Project no: Project 3
+
+Project due date: October 20, 2017 (1 day late)
+
+Project description: 
+Extending the functionality of the given tracker framework.
+Including polymorphism in the Engine class by having all drawables in one vector.
+Adding different sprites and creating a new sprite class that can flip the image upon contact with a wall.
+
+Backgrounds: 
+http://spritedatabase.net/file/16792/Sagat_Stage
+Sprites: 
+http://spritedatabase.net/file/1274/Jiraiya
+http://spritedatabase.net/file/1254/Naruto_Kyuubi
+
+The easiest part of this project: Sprite Sheets!!!!
+
+Problems that I had in completing this project: Starting on time.... zzzz
