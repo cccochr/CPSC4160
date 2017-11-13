@@ -2,12 +2,14 @@
 
 Player::Player( const std::string& name) :
   TwoWayMultiSprite(name),
+  observers(),
   collision(false),
   initialVelocity(getVelocity())
 { }
 
 Player::Player(const Player& s) :
   TwoWayMultiSprite(s), 
+  observers(s.observers),
   collision(s.collision),
   initialVelocity(s.getVelocity())
   { }
@@ -15,8 +17,20 @@ Player::Player(const Player& s) :
 Player& Player::operator=(const Player& s) {
   TwoWayMultiSprite::operator=(s);
   collision = s.collision;
+  observers = s.observers;
   initialVelocity = s.initialVelocity;
   return *this;
+}
+
+void Player::detach( SmartTwoWayMultiSprite* o ) {
+  std::list<SmartTwoWayMultiSprite*>::iterator ptr = observers.begin();
+  while ( ptr != observers.end() ) {
+    if ( *ptr == o ) {
+      ptr = observers.erase(ptr);
+      return;
+    }
+    ++ptr;
+  }
 }
 
 void Player::stop() { 
@@ -47,11 +61,23 @@ void Player::down()  {
 }
 
 void Player::update(Uint32 ticks) {
-  if ( !collision ) advanceFrame(ticks);
+  if ( !collision ){ 
+  TwoWayMultiSprite::update(ticks);
+
+  std::list<SmartTwoWayMultiSprite*>::iterator ptr = observers.begin();
+  while ( ptr != observers.end() ) {
+    (*ptr)->setPlayerPos( getPosition() );
+    ++ptr;
+  }
 
   Vector2f incr = getVelocity() * static_cast<float>(ticks) * 0.001;
   setPosition(getPosition() + incr);
 
   stop();
+  }
+  else{
+  TwoWayMultiSprite::update(ticks);
+  stop();
+  }
 }
 

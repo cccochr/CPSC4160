@@ -25,9 +25,8 @@ void Viewport::setObjectToTrack(const Drawable *obj) {
 }
 
 void Viewport::draw() const {
-  IOmod::getInstance().writeText("Tracking: " + objectToTrack->getName(), 30, 30);
-  IOmod::getInstance().writeText("Chance Cochran", 30, 400);
-//////////////////////////////////////////////////////////////////////////////////////////////////////
+  IOmod::getInstance().writeText("Chance Cochran + Baylor Jones", 30, 400);
+
 
 }
 

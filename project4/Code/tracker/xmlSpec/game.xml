@@ -2,7 +2,7 @@
 <GameData>
 <!-- screenTitle is also used to identify you and your animation. 
      So make sure to include your name as part of the screenTitle -->
-<title>Chance Cochran Animation</title>
+<title>Naruto vs Jiraya</title>
 <maxStringSize>50</maxStringSize>
 
 <frameCapOn>true</frameCapOn>
@@ -42,17 +42,31 @@
   <alpha>0</alpha>
 </font>
 
-<Jiraya>
+<SmartJiraya>
   <file>assets/Jiraya_multi_4_520_129.png</file>
   <startLoc x="50" y="140"/>
   <frames>4</frames>
   <imageWidth>130</imageWidth>
   <imageHeight>129</imageHeight>
   <frameInterval>75</frameInterval>
-  <speedX>250</speedX>
-  <speedY>250</speedY>
+  <speedX>200</speedX>
+  <speedY>200</speedY>
+  <safeDistance>200</safeDistance>
   <transparency>false</transparency>
-</Jiraya>
+</SmartJiraya>
+
+<SmartJirayaLeft>
+  <file>assets/JirayaLeft_multi_4_520_129.png</file>
+  <startLoc x="50" y="140"/>
+  <frames>4</frames>
+  <imageWidth>130</imageWidth>
+  <imageHeight>129</imageHeight>
+  <frameInterval>75</frameInterval>
+  <speedX>200</speedX>
+  <speedY>200</speedY>
+  <safeDistance>200</safeDistance>
+  <transparency>false</transparency>
+</SmartJirayaLeft>
 
 <Naruto>
   <file>assets/Naruto_multi_4_448x120.png</file>
@@ -78,19 +92,11 @@
   <transparency>false</transparency>
 </NarutoLeft>
 
-<Toad>
-  <file>assets/Frog_single_182x154.png</file>
-  <startLoc x="227" y="240"/>
-  <speedX>300</speedX>
-  <speedY>300</speedY>
-  <transparency>true</transparency>
-</Toad>
-
 <HUD>
   <width>300</width>
   <height>300</height>
-  <X>250</X>
-  <Y>150</Y>
+  <X>10</X>
+  <Y>10</Y>
 </HUD>
 
 </GameData>

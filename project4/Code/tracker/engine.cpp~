@@ -12,10 +12,14 @@
 #include "engine.h"
 #include "frameGenerator.h"
 
+
 Engine::~Engine() { 
   delete player;
   for(Drawable* step:spriteList){
     delete step;
+  }
+  for ( CollisionStrategy* strategy : strategies ) {
+    delete strategy;
   }
   std::cout << "Terminating program" << std::endl;
 }
@@ -28,17 +32,25 @@ Engine::Engine() :
   world("back", Gamedata::getInstance().getXmlInt("back/factor") ),
   world2("back2", Gamedata::getInstance().getXmlInt("back2/factor") ),
   viewport( Viewport::getInstance() ),
-  Toad(new Sprite("Toad")),
-  Naruto(new TwoWayMultiSprite("Naruto")),
-  Jiraya(new MultiSprite("Jiraya")),
   player(new Player("Naruto")),
   hud( HUD::getInstance() ),
+  strategies(),
+  currentStrategy(1),
+  collision(false),
   currentSprite(0),
   makeVideo( false )
 {
-  spriteList.push_back(Toad),
-  spriteList.push_back(Naruto),
-  spriteList.push_back(Jiraya),
+  Vector2f pos = player->getPosition();
+  int w = player->getScaledWidth();
+  int h = player->getScaledHeight();
+  Jiraya = new SmartTwoWayMultiSprite("SmartJiraya", pos, w, h);
+  player->attach(Jiraya);
+  spriteList.push_back(Jiraya);
+
+  strategies.push_back( new RectangularCollisionStrategy );
+  strategies.push_back( new PerPixelCollisionStrategy );
+  strategies.push_back( new MidPointCollisionStrategy );
+
   Viewport::getInstance().setObjectToTrack(player);
   std::cout << "Loading complete" << std::endl;
 }
@@ -50,6 +62,10 @@ void Engine::draw() const {
   for(auto step: spriteList){
   step->draw();
   }
+  strategies[currentStrategy]->draw();
+  if ( collision ) {
+    IOmod::getInstance().writeText("Oops: Collision", 10, 90);
+  }
   player->draw();
   viewport.draw();
   hud.draw();
@@ -57,18 +73,18 @@ void Engine::draw() const {
 }
 
 void Engine::update(Uint32 ticks) {
-  //check for collisions
-std::cout << ticks << std::endl;
+  checkForCollisions();
   player->update(ticks);
   for(auto step: spriteList){
     step->update(ticks);
   }
   world.update();
   world2.update();
-  if(ticks > 3000) std::cout << "ticks" << std::endl;
+  if(clock.getTicks() > 3000) hud.update();
   viewport.update(); // always update viewport last
 }
 
+/*
 void Engine::switchSprite(){
   ++currentSprite;
   currentSprite = currentSprite % 3;
@@ -80,6 +96,23 @@ void Engine::switchSprite(){
   }
   else {
     Viewport::getInstance().setObjectToTrack(Toad);
+  }
+}
+*/
+
+void Engine::checkForCollisions() {
+  collision = false;
+  for ( const Drawable* d : spriteList ) {
+    if ( strategies[currentStrategy]->execute(*player, *d) ) {
+      collision = true;
+    }
+  }
+  if ( collision ) {
+    player->collided();
+  }
+  else {
+    player->missed();
+    collision = false;
   }
 }
 
@@ -105,7 +138,7 @@ void Engine::play() {
           else clock.pause();
         }
         if ( keystate[SDL_SCANCODE_T] ) {
-          switchSprite();
+          //switchSprite();
         }
         if (keystate[SDL_SCANCODE_F1]) {
           hud.setVisible(!(hud.getVisible()));

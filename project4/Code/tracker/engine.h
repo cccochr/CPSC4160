@@ -4,10 +4,13 @@
 #include "renderContext.h"
 #include "clock.h"
 #include "world.h"
+#include "SmartTwoWayMultiSprite.h"
 #include "viewport.h"
 #include "HUD.h"
+#include "collisionStrategy.h"
+
 class Player;
-//class CollisionStrategy;
+class CollisionStrategy;
 
 class Engine {
 public:
@@ -16,7 +19,7 @@ public:
   Engine(const Engine&) = delete;
   Engine& operator=(const Engine&) = delete;
   void play();
-  void switchSprite();
+  //void switchSprite();
 
 private:
   const RenderContext* rc;
@@ -28,15 +31,16 @@ private:
   World world2;
   Viewport& viewport;
 
-  Drawable* Toad;
-  Drawable* Naruto;
-  Drawable* Jiraya;
+  SmartTwoWayMultiSprite* Jiraya;
 
   Player* player;
 
   HUD& hud;
   
   std::vector<Drawable*> spriteList;  
+  std::vector<CollisionStrategy*> strategies;
+  int currentStrategy;
+  bool collision;
 
   int currentSprite;
 

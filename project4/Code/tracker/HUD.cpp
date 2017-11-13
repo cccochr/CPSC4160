@@ -24,12 +24,12 @@ void HUD::update(){
 
 void HUD::draw() const {
   if(visible || initVis){
-    //SDL_Rect backgroud = {200,100,50,50};
-    //SDL_SetRenderDrawColor(renderer, 100,100,100,100);
-    //SDL_RenderFillRect(renderer, &background);
-
+    IOmod::getInstance().writeText("Move around with WASD", position[0], position[1]);
+    //IOmod::getInstance().writeText(fpsString, position[0], position[1]);
+    //IOmod::getInstance().writeText(fpsString, position[0], position[1]);
+    //IOmod::getInstance().writeText(fpsString, position[0], position[1]);
     const std::string fpsString = "FPS: " + std::to_string(Clock::getInstance().getFps());
-    IOmod::getInstance().writeText(fpsString, position[0], position[1]);
+    IOmod::getInstance().writeText(fpsString, position[0], position[1]+50);
   }
 }
 
