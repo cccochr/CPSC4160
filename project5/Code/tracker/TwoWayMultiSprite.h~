@@ -23,7 +23,7 @@ public:
     return getScale()*images[currentFrame]->getHeight(); 
   } 
   int getCurrentChannel() const {
-    return currentChannel;
+    return currentChannel();
   }
   virtual const SDL_Surface* getSurface() const { 
     return images[currentFrame]->getSurface();

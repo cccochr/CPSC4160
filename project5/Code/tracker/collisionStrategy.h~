@@ -1,5 +1,4 @@
 #include <cmath>
-#include "TwoWayMultiSprite.h"
 #include "drawable.h"
 
 class CollisionStrategy {

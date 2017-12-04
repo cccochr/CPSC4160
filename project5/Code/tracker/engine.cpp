@@ -12,9 +12,12 @@
 #include "engine.h"
 #include "frameGenerator.h"
 
+struct painters {
+  bool operator() (TwoWayMultiSprite* a, TwoWayMultiSprite* b) {return (a->getCurrentChannel() > b->getCurrentChannel());}
+}paintersSort;
 
 Engine::~Engine() { 
-  delete player;
+//  delete player;
   for(Drawable* step:spriteList){
     delete step;
   }
@@ -29,23 +32,23 @@ Engine::Engine() :
   io( IOmod::getInstance() ),
   clock( Clock::getInstance() ),
   renderer( rc->getRenderer() ),
-  world("back", Gamedata::getInstance().getXmlInt("back/factor") ),
-  world2("back2", Gamedata::getInstance().getXmlInt("back2/factor") ),
+  world("back", Gamedata::getInstance().getXmlInt("foreground/factor") ),
+  world2("foreground", Gamedata::getInstance().getXmlInt("foreground/factor") ),
   viewport( Viewport::getInstance() ),
   player(new Player("Naruto")),
+  Jiraya(new SmartTwoWayMultiSprite("SmartJiraya", player->getPosition(), player->getScaledWidth(), player->getScaledHeight())),
   hud( HUD::getInstance() ),
+  spriteList(),
+  backgroundSpriteList(),
   strategies(),
   currentStrategy(1),
   collision(false),
   currentSprite(0),
   makeVideo( false )
 {
-  Vector2f pos = player->getPosition();
-  int w = player->getScaledWidth();
-  int h = player->getScaledHeight();
-  Jiraya = new SmartTwoWayMultiSprite("SmartJiraya", pos, w, h);
   player->attach(Jiraya);
   spriteList.push_back(Jiraya);
+  spriteList.push_back(player);
 
   strategies.push_back( new RectangularCollisionStrategy );
   strategies.push_back( new PerPixelCollisionStrategy );
@@ -66,7 +69,7 @@ void Engine::draw() const {
   if ( collision ) {
     IOmod::getInstance().writeText("Oops: Collision", 10, 90);
   }
-  player->draw();
+  //player->draw();
   viewport.draw();
   hud.draw();
   SDL_RenderPresent(renderer);
@@ -74,7 +77,8 @@ void Engine::draw() const {
 
 void Engine::update(Uint32 ticks) {
   checkForCollisions();
-  player->update(ticks);
+  //player->update(ticks);
+  std::sort (spriteList.begin(), spriteList.end(), paintersSort);
   for(auto step: spriteList){
     step->update(ticks);
   }
@@ -102,7 +106,8 @@ void Engine::switchSprite(){
 
 void Engine::checkForCollisions() {
   collision = false;
-  for ( const Drawable* d : spriteList ) {
+  for ( const TwoWayMultiSprite* d : spriteList ) {
+    if(d == player) continue;
     if ( strategies[currentStrategy]->execute(*player, *d) ) {
       collision = true;
     }
@@ -140,6 +145,15 @@ void Engine::play() {
         if ( keystate[SDL_SCANCODE_T] ) {
           //switchSprite();
         }
+        if (keystate[SDL_SCANCODE_W]) {
+          player->up();
+        }
+        if (keystate[SDL_SCANCODE_S]) {
+          player->down();
+        }
+	if (keystate[SDL_SCANCODE_SPACE]) {
+   	  player->jump();
+        }
         if (keystate[SDL_SCANCODE_F1]) {
           hud.setVisible(!(hud.getVisible()));
         }
@@ -165,12 +179,7 @@ void Engine::play() {
       if (keystate[SDL_SCANCODE_D]) {
         player->right();
       }
-      if (keystate[SDL_SCANCODE_W]) {
-        player->up();
-      }
-      if (keystate[SDL_SCANCODE_S]) {
-        player->down();
-      }
+
       draw();
       update(ticks);
       if ( makeVideo ) {

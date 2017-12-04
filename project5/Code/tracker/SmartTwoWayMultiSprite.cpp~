@@ -52,7 +52,7 @@ void SmartTwoWayMultiSprite::update(Uint32 ticks) {
       if ( x < ex ) goLeft();
       if ( x > ex ) goRight();
       if ( currentChannel == playerChannel ) {
-        //std::cout << "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" << std::endl;
+        std::cout << "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" << std::endl;
         if(rand()%2 == 0){ 
           if(currentChannel != 3){
           up();}
@@ -61,7 +61,7 @@ void SmartTwoWayMultiSprite::update(Uint32 ticks) {
           if(currentChannel != 1){
           down();}  
         }      
-        //std::cout << currentChannel << std::endl;
+        std::cout << currentChannel << std::endl;
       }
 
     }

@@ -24,7 +24,6 @@ public:
 
   void right();
   void left();
-  void jump();
 //  void up();
 //  void down();
   void stop();

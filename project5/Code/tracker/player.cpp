@@ -49,34 +49,50 @@ void Player::left()  {
     turnLeft();
   }
 } 
-void Player::up()    { 
-  if ( getY() > 0) {
-    setVelocityY( -initialVelocity[1] );
-  }
-} 
-void Player::down()  { 
-  if ( getY() < worldHeight-getScaledHeight()) {
-    setVelocityY( initialVelocity[1] );
-  }
+
+
+//void Player::up()    { 
+//  if ( getY() > 265) {
+//    setVelocityY( -initialVelocity[1] );
+//  }
+//} 
+//void Player::down()  { 
+//  if ( getY() < worldHeight-getScaledHeight()) {
+//    setVelocityY( initialVelocity[1] );
+//  }
+//}
+
+
+
+// New Code for Jump
+void Player::jump()  {
+  //if ( getY() > 270)
+  //{
+     //setVelocityY(-initialVelocity[1]);
+     //std::cout <<"JUMP"<< std::endl;
+  //}
+   
 }
+// New Code for Jump
 
 void Player::update(Uint32 ticks) {
-  if ( !collision ){ 
+
   TwoWayMultiSprite::update(ticks);
 
+  if ( !collision ){ 
   std::list<SmartTwoWayMultiSprite*>::iterator ptr = observers.begin();
-  while ( ptr != observers.end() ) {
-    (*ptr)->setPlayerPos( getPosition() );
-    ++ptr;
-  }
+    while ( ptr != observers.end() ) {
+      (*ptr)->setPlayerPos( getPosition() );
+      (*ptr)->setPlayerChannel( currentChannel );
+      ++ptr;
+    }
 
   Vector2f incr = getVelocity() * static_cast<float>(ticks) * 0.001;
   setPosition(getPosition() + incr);
 
   stop();
   }
-  else{
-  TwoWayMultiSprite::update(ticks);
+  else{ // death animation
   stop();
   }
 }

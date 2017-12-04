@@ -76,12 +76,14 @@ void TwoWayMultiSprite::turnLeft(){
 void TwoWayMultiSprite::up(){  
   if(channelMovement != 0) return;
   if(currentChannel == Gamedata::getInstance().getXmlInt("foreground/playerChannels")) return;
+  std::cout << "up " << std::endl;
   channelMovement = 1;
 }
 
 void TwoWayMultiSprite::down(){
   if(channelMovement != 0) return;
   if(currentChannel == 1) return;
+  std::cout << "down" << std::endl;
   channelMovement = 2;
 }
 
@@ -92,6 +94,7 @@ void TwoWayMultiSprite::update(Uint32 ticks) {
   //up
   if(channelMovement == 1){
 
+    std::cout << "up " << name << std::endl;
     setY(getY()-(Gamedata::getInstance().getXmlInt("foreground/channelHeight")));
     //if(getVelocityY() == 0)  setVelocityY(-1 * getVelocityX());
     //made it to new channel          
@@ -105,6 +108,7 @@ void TwoWayMultiSprite::update(Uint32 ticks) {
   //down
   else if(channelMovement == 2){
 
+    std::cout << "down " << name << std::endl;
     setY(getY()+(Gamedata::getInstance().getXmlInt("foreground/channelHeight")));
     //if(getVelocityY() == 0)  setVelocityY(getVelocityX());
     //made it to new channel
