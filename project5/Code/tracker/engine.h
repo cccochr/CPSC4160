@@ -27,7 +27,7 @@ private:
   Clock& clock;
 
   SDL_Renderer * const renderer;
-  World world;
+  //World world;
   World world2;
   Viewport& viewport;
 

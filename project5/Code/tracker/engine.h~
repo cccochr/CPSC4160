@@ -51,5 +51,4 @@ private:
 
   void printScales() const;
   void checkForCollisions();
-  bool paintersSort(TwoWayMultiSprite* a, TwoWayMultiSprite* b);
 };

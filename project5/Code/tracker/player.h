@@ -25,11 +25,12 @@ public:
   void right();
   void left();
   void jump();
-//  void up();
-//  void down();
   void stop();
 private:
   bool collision;
   Vector2f initialVelocity;
+  int originalY;
+  int jumping; // 0 = no jump, 1 = upward jumping, 2 = falling
+  int jumpHeight;  
 };
 #endif

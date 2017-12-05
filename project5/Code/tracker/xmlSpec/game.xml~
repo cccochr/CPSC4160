@@ -12,27 +12,21 @@
 <username>cccochr</username>
 
 <view>
-  <width>854</width>
-  <height>480</height>
+  <width>2000</width>
+  <height>1400</height>
 </view>
 
 <world>
-  <width>2000</width>
-  <height>480</height>
+  <width>10000</width>
+  <height>1400</height>
 </world>
 
-<back>
-  <file>assets/Back_Back.png</file>
-  <factor>3</factor>
-  <transparency>false</transparency>
-</back>
-
 <foreground>
-  <file>assets/Mid_Back.png</file>
+  <file>assets/Beatles Background_1.png</file>
   <factor>1</factor>
   <transparency>false</transparency>
   <playerChannels>3</playerChannels>
-  <channelHeight>40</channelHeight>
+  <channelHeight>250</channelHeight>
 </foreground>
 
 <font name="font">
@@ -46,12 +40,12 @@
 
 <SmartJiraya>
   <file>assets/Jiraya_multi_4_520_129.png</file>
-  <startLoc x="50" y="0"/>
+  <startLoc x="50" y="1100"/>
   <frames>4</frames>
   <imageWidth>130</imageWidth>
   <imageHeight>129</imageHeight>
   <frameInterval>75</frameInterval>
-  <speedX>200</speedX>
+  <speedX>450</speedX>
   <speedY>0</speedY>
   <safeDistance>200</safeDistance>
   <transparency>false</transparency>
@@ -59,12 +53,12 @@
 
 <SmartJirayaLeft>
   <file>assets/JirayaLeft_multi_4_520_129.png</file>
-  <startLoc x="50" y="0"/>
+  <startLoc x="50" y="1100"/>
   <frames>4</frames>
   <imageWidth>130</imageWidth>
   <imageHeight>129</imageHeight>
   <frameInterval>75</frameInterval>
-  <speedX>200</speedX>
+  <speedX>450</speedX>
   <speedY>0</speedY>
   <safeDistance>50</safeDistance>
   <transparency>false</transparency>
@@ -72,24 +66,25 @@
 
 <Naruto>
   <file>assets/Naruto_multi_4_448x120.png</file>
-  <startLoc x="50" y="0"/>
+  <startLoc x="50" y="1100"/>
   <frames>4</frames>
   <imageWidth>112</imageWidth>
   <imageHeight>120</imageHeight>
   <frameInterval>75</frameInterval>
-  <speedX>200</speedX>
+  <speedX>700</speedX>
   <speedY>0</speedY>
+  <jumpHeight>200</jumpHeight>
   <transparency>false</transparency>
 </Naruto>
 
 <NarutoLeft>
   <file>assets/NarutoLeft_multi_4_448x120.png</file>
-  <startLoc x="50" y="0"/>
+  <startLoc x="50" y="1100"/>
   <frames>4</frames>
   <imageWidth>112</imageWidth>
   <imageHeight>120</imageHeight>
   <frameInterval>75</frameInterval>
-  <speedX>200</speedX>
+  <speedX>700</speedX>
   <speedY>0</speedY>
   <transparency>false</transparency>
 </NarutoLeft>

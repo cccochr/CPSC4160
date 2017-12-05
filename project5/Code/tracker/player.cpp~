@@ -1,17 +1,24 @@
 #include "player.h"
+#include "gamedata.h"
 
 Player::Player( const std::string& name) :
   TwoWayMultiSprite(name),
   observers(),
   collision(false),
-  initialVelocity(getVelocity())
+  initialVelocity(getVelocity()),
+  originalY(0),
+  jumping(0),
+  jumpHeight(Gamedata::getInstance().getXmlInt(name+"/jumpHeight"))
 { }
 
 Player::Player(const Player& s) :
   TwoWayMultiSprite(s), 
   observers(s.observers),
   collision(s.collision),
-  initialVelocity(s.getVelocity())
+  initialVelocity(s.getVelocity()),
+  originalY(s.originalY),
+  jumping(s.jumping),
+  jumpHeight(Gamedata::getInstance().getXmlInt(name+"/jumpHeight"))
   { }
 
 Player& Player::operator=(const Player& s) {
@@ -19,6 +26,9 @@ Player& Player::operator=(const Player& s) {
   collision = s.collision;
   observers = s.observers;
   initialVelocity = s.initialVelocity;
+  originalY = s.originalY;
+  jumping = s.jumping;
+  jumpHeight = Gamedata::getInstance().getXmlInt(name+"/jumpHeight");
   return *this;
 }
 
@@ -50,33 +60,49 @@ void Player::left()  {
   }
 } 
 
-
-//void Player::up()    { 
-//  if ( getY() > 265) {
-//    setVelocityY( -initialVelocity[1] );
-//  }
-//} 
-//void Player::down()  { 
-//  if ( getY() < worldHeight-getScaledHeight()) {
-//    setVelocityY( initialVelocity[1] );
-//  }
-//}
-
-
-
 // New Code for Jump
 void Player::jump()  {
-  if ( getY() > 270)
-  {
-     //setVelocityY(-initialVelocity[1]);
-     //std::cout <<"JUMP"<< std::endl;
-  }
-   
+    if(jumping) return;
+    if(channelMovement) return;
+    originalY = getY();
+    channelMovement = -1;
+    jumping = 1;
+    std::cout << "jumping" << std::endl;
 }
 // New Code for Jump
 
+
 void Player::update(Uint32 ticks) {
 
+    //up jump
+    if (jumping == 1){
+      std::cout << "jumping up" << std::endl;
+      int currentY = getY();
+      if(getVelocityY() == 0)  setVelocityY(-2000);
+      if(currentY <= originalY - jumpHeight) jumping = 2;
+    }
+    else if (jumping == 2){
+      std::cout << "jumping down" << std::endl;
+      setVelocityY(2000);
+      int currentY = getY();
+      if(currentY >= originalY){
+        std::cout << "jumping break" << std::endl;
+        setVelocityY(0);
+        setY(originalY);
+        jumping = 0; 
+        channelMovement = 0;     
+      }
+    }
+    
+    
+    //while (currentY <= originalY - jumpHeight){
+    //  currentY = currentY + jumpHeight; //iinc // updating.....
+    //}
+    //while ( currentY >= originalY){
+    //currentY = currentY - jumpHeight; //ddec // updating...
+    //}
+    
+//jump code here
   TwoWayMultiSprite::update(ticks);
 
   if ( !collision ){ 
@@ -87,8 +113,8 @@ void Player::update(Uint32 ticks) {
       ++ptr;
     }
 
-  Vector2f incr = getVelocity() * static_cast<float>(ticks) * 0.001;
-  setPosition(getPosition() + incr);
+  //Vector2f incr = getVelocity() * static_cast<float>(ticks) * 0.001;
+  //setPosition(getPosition() + incr);
 
   stop();
   }

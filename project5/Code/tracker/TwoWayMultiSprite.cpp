@@ -85,6 +85,10 @@ void TwoWayMultiSprite::down(){
   channelMovement = 2;
 }
 
+int TwoWayMultiSprite::getCurrentChannelY(){
+  return ( (Gamedata::getInstance().getXmlInt("world/height")) - ( (currentChannel)*(Gamedata::getInstance().getXmlInt("foreground/channelHeight")))); 
+}
+
 
 void TwoWayMultiSprite::update(Uint32 ticks) { 
   advanceFrame(ticks);
@@ -92,32 +96,37 @@ void TwoWayMultiSprite::update(Uint32 ticks) {
   //up
   if(channelMovement == 1){
 
-    setY(getY()-(Gamedata::getInstance().getXmlInt("foreground/channelHeight")));
-    //if(getVelocityY() == 0)  setVelocityY(-1 * getVelocityX());
+    std::cout << "moving up" << std::endl;
+
+    //setY(getY()-(Gamedata::getInstance().getXmlInt("foreground/channelHeight")));
+    setVelocityY(-100);
     //made it to new channel          
-    //if(getY() <= (Gamedata::getInstance().getXmlInt("world/height") - (currentChannel*Gamedata::getInstance().getXmlInt("foreground/channelHeight")) ){	
+    if(getY() <= getCurrentChannelY()){	
     channelMovement = 0;
     currentChannel++;
-    //setVelocityY(0);
-    //}
+    setVelocityY(0);
+    std::cout << "moved up" << std::endl;
+    }
 
   }
   //down
   else if(channelMovement == 2){
+ 
+    std::cout << "moving down" << std::endl;
 
-    setY(getY()+(Gamedata::getInstance().getXmlInt("foreground/channelHeight")));
-    //if(getVelocityY() == 0)  setVelocityY(getVelocityX());
+    //setY(getY()+(Gamedata::getInstance().getXmlInt("foreground/channelHeight")));
+    setVelocityY(100);
     //made it to new channel
-    //if(getPosition()[1] >= Gamedata::getInstance().getXmlInt("world/height") - (currentChannel*Gamedata::getInstance().getXmlInt("foreground/channelHeight")) ){
+    if(getY() >= getCurrentChannelY()){
     channelMovement = 0;
     currentChannel--;
-    //setVelocityY(0);
-    //}
+    setVelocityY(0);
+    std::cout << "moved down" << std::endl;
+    }
 
   }
-  else{
-    //std::cout << "out" << std::endl;
-  }
+
+    std::cout << currentChannel << std::endl;
 
   //upper bound
   if ( getY() < 0) {

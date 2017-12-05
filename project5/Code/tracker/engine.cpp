@@ -32,7 +32,7 @@ Engine::Engine() :
   io( IOmod::getInstance() ),
   clock( Clock::getInstance() ),
   renderer( rc->getRenderer() ),
-  world("back", Gamedata::getInstance().getXmlInt("foreground/factor") ),
+  //world("back", Gamedata::getInstance().getXmlInt("foreground/factor") ),
   world2("foreground", Gamedata::getInstance().getXmlInt("foreground/factor") ),
   viewport( Viewport::getInstance() ),
   player(new Player("Naruto")),
@@ -46,6 +46,8 @@ Engine::Engine() :
   currentSprite(0),
   makeVideo( false )
 {
+  //Jiraya->setScale(3);
+  //player->setScale(3);
   player->attach(Jiraya);
   spriteList.push_back(Jiraya);
   spriteList.push_back(player);
@@ -59,7 +61,7 @@ Engine::Engine() :
 }
 
 void Engine::draw() const {
-  world.draw();
+  //world.draw();
   world2.draw();
 
   for(auto step: spriteList){
@@ -82,7 +84,7 @@ void Engine::update(Uint32 ticks) {
   for(auto step: spriteList){
     step->update(ticks);
   }
-  world.update();
+  //world.update();
   world2.update();
   if(clock.getTicks() > 3000) hud.update();
   viewport.update(); // always update viewport last
