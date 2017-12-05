@@ -4,8 +4,6 @@
 #include <string>
 #include <random>
 #include <iomanip>
-#include "sprite.h"
-#include "multisprite.h"
 #include "player.h"
 #include "TwoWayMultiSprite.h"
 #include "gamedata.h"

@@ -44,11 +44,11 @@ protected:
   unsigned frameInterval;
   float timeSinceLastFrame;
   int currentChannel; //index 1
-  int channelMovement; // 0 = false, 1 = up, 2 = down, -1 = lock
+  int channelMovement; // 0 = false, 1 = up, 2 = down, -1 = lock, -2 = start 
   int worldWidth;
   int worldHeight;
 
-  int getCurrentChannelY();
+  int getNewChannelY(bool direction);
   void advanceFrame(Uint32 ticks);
   TwoWayMultiSprite& operator=(const TwoWayMultiSprite&);
 };

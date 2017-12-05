@@ -12,8 +12,8 @@ void TwoWayMultiSprite::advanceFrame(Uint32 ticks) {
 
 TwoWayMultiSprite::TwoWayMultiSprite( const std::string& name) :
   Drawable(name, 
-           Vector2f(Gamedata::getInstance().getXmlInt(name+"/startLoc/x")+100, 
-                    Gamedata::getInstance().getXmlInt(name+"/startLoc/y")+100), 
+           Vector2f(Gamedata::getInstance().getXmlInt(name+"/startLoc/x"), 
+                    Gamedata::getInstance().getXmlInt(name+"/startLoc/y")), 
            Vector2f(Gamedata::getInstance().getXmlInt(name+"/speedX"),
                     Gamedata::getInstance().getXmlInt(name+"/speedY"))
            ),
@@ -25,7 +25,7 @@ TwoWayMultiSprite::TwoWayMultiSprite( const std::string& name) :
   frameInterval( Gamedata::getInstance().getXmlInt(name+"/frameInterval")),
   timeSinceLastFrame(0),
   currentChannel(1),
-  channelMovement(0),
+  channelMovement(-2),
   worldWidth(Gamedata::getInstance().getXmlInt("world/width")),
   worldHeight(Gamedata::getInstance().getXmlInt("world/height"))
 { }
@@ -47,9 +47,6 @@ TwoWayMultiSprite::TwoWayMultiSprite(const TwoWayMultiSprite& s) :
 
 TwoWayMultiSprite& TwoWayMultiSprite::operator=(const TwoWayMultiSprite& s) {
   Drawable::operator=(s);
-  //imagesRight(s.imagesRight);
-  //imagesLeft(s.imagesLeft);
-  //images(s.imagesRight);
   currentFrame = (s.currentFrame);
   numberOfFrames = ( s.numberOfFrames );
   frameInterval = ( s.frameInterval );
@@ -85,8 +82,9 @@ void TwoWayMultiSprite::down(){
   channelMovement = 2;
 }
 
-int TwoWayMultiSprite::getCurrentChannelY(){
-  return ( (Gamedata::getInstance().getXmlInt("world/height")) - ( (currentChannel)*(Gamedata::getInstance().getXmlInt("foreground/channelHeight")))); 
+int TwoWayMultiSprite::getNewChannelY(bool direction){
+  if(direction) return ( (Gamedata::getInstance().getXmlInt("world/height")) - ( (currentChannel)*(Gamedata::getInstance().getXmlInt("foreground/channelHeight")))); 
+  else return ( (Gamedata::getInstance().getXmlInt("world/height")) + ( (currentChannel)*(Gamedata::getInstance().getXmlInt("foreground/channelHeight")))); 
 }
 
 
@@ -101,7 +99,7 @@ void TwoWayMultiSprite::update(Uint32 ticks) {
     //setY(getY()-(Gamedata::getInstance().getXmlInt("foreground/channelHeight")));
     setVelocityY(-100);
     //made it to new channel          
-    if(getY() <= getCurrentChannelY()){	
+    if(getY() <= getNewChannelY(true)){	
     channelMovement = 0;
     currentChannel++;
     setVelocityY(0);
@@ -117,7 +115,7 @@ void TwoWayMultiSprite::update(Uint32 ticks) {
     //setY(getY()+(Gamedata::getInstance().getXmlInt("foreground/channelHeight")));
     setVelocityY(100);
     //made it to new channel
-    if(getY() >= getCurrentChannelY()){
+    if(getY() >= getNewChannelY(false)){
     channelMovement = 0;
     currentChannel--;
     setVelocityY(0);
@@ -125,8 +123,13 @@ void TwoWayMultiSprite::update(Uint32 ticks) {
     }
 
   }
+  //initialize
+  else if(channelMovement == -2){
+    setY(getY());
+    channelMovement = 0;
+  }
 
-    std::cout << currentChannel << std::endl;
+   // std::cout << currentChannel << std::endl;
 
   //upper bound
   if ( getY() < 0) {
