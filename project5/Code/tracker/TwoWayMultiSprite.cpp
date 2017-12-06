@@ -25,6 +25,7 @@ TwoWayMultiSprite::TwoWayMultiSprite( const std::string& name) :
   frameInterval( Gamedata::getInstance().getXmlInt(name+"/frameInterval")),
   timeSinceLastFrame(0),
   currentChannel(1),
+  lastChannelY(getY()),
   channelMovement(-2),
   worldWidth(Gamedata::getInstance().getXmlInt("world/width")),
   worldHeight(Gamedata::getInstance().getXmlInt("world/height"))
@@ -40,6 +41,7 @@ TwoWayMultiSprite::TwoWayMultiSprite(const TwoWayMultiSprite& s) :
   frameInterval( s.frameInterval ),
   timeSinceLastFrame( s.timeSinceLastFrame ),
   currentChannel(s.currentChannel),
+  lastChannelY(s.lastChannelY),
   channelMovement(s.channelMovement),
   worldWidth( s.worldWidth ),
   worldHeight( s.worldHeight )
@@ -52,6 +54,7 @@ TwoWayMultiSprite& TwoWayMultiSprite::operator=(const TwoWayMultiSprite& s) {
   frameInterval = ( s.frameInterval );
   timeSinceLastFrame = ( s.timeSinceLastFrame );
   currentChannel = (s.currentChannel);
+  lastChannelY = (s.lastChannelY);
   channelMovement = (s.channelMovement);
   worldWidth = ( s.worldWidth );
   worldHeight = ( s.worldHeight );
@@ -83,8 +86,8 @@ void TwoWayMultiSprite::down(){
 }
 
 int TwoWayMultiSprite::getNewChannelY(bool direction){
-  if(direction) return ( (Gamedata::getInstance().getXmlInt("world/height")) - ( (currentChannel)*(Gamedata::getInstance().getXmlInt("foreground/channelHeight")))); 
-  else return ( (Gamedata::getInstance().getXmlInt("world/height")) + ( (currentChannel)*(Gamedata::getInstance().getXmlInt("foreground/channelHeight")))); 
+  if(direction) return (lastChannelY-(Gamedata::getInstance().getXmlInt("foreground/channelHeight"))); 
+  else return (lastChannelY - (Gamedata::getInstance().getXmlInt("foreground/channelHeight")) );
 }
 
 
@@ -115,7 +118,7 @@ void TwoWayMultiSprite::update(Uint32 ticks) {
     //setY(getY()+(Gamedata::getInstance().getXmlInt("foreground/channelHeight")));
     setVelocityY(100);
     //made it to new channel
-    if(getY() >= getNewChannelY(false)){
+    if(getY() >=  getNewChannelY(false)){
     channelMovement = 0;
     currentChannel--;
     setVelocityY(0);

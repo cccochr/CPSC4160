@@ -40,7 +40,7 @@
 
 <SmartJiraya>
   <file>assets/Jiraya_multi_4_520_129.png</file>
-  <startLoc x="50" y="900"/>
+  <startLoc x="50" y="1271"/>
   <frames>4</frames>
   <imageWidth>130</imageWidth>
   <imageHeight>129</imageHeight>
@@ -53,7 +53,7 @@
 
 <SmartJirayaLeft>
   <file>assets/JirayaLeft_multi_4_520_129.png</file>
-  <startLoc x="50" y="900"/>
+  <startLoc x="50" y="1271"/>
   <frames>4</frames>
   <imageWidth>130</imageWidth>
   <imageHeight>129</imageHeight>
@@ -66,7 +66,7 @@
 
 <Naruto>
   <file>assets/Naruto_multi_4_448x120.png</file>
-  <startLoc x="50" y="900"/>
+  <startLoc x="50" y="1280"/>
   <frames>4</frames>
   <imageWidth>112</imageWidth>
   <imageHeight>120</imageHeight>
@@ -79,7 +79,7 @@
 
 <NarutoLeft>
   <file>assets/NarutoLeft_multi_4_448x120.png</file>
-  <startLoc x="50" y="900"/>
+  <startLoc x="50" y="1280"/>
   <frames>4</frames>
   <imageWidth>112</imageWidth>
   <imageHeight>120</imageHeight>

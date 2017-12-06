@@ -44,6 +44,7 @@ protected:
   unsigned frameInterval;
   float timeSinceLastFrame;
   int currentChannel; //index 1
+  int lastChannelY;
   int channelMovement; // 0 = false, 1 = up, 2 = down, -1 = lock, -2 = start 
   int worldWidth;
   int worldHeight;
