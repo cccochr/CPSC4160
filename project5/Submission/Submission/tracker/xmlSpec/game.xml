@@ -1,0 +1,99 @@
+<?xml version = "1.0"?>
+<GameData>
+<!-- screenTitle is also used to identify you and your animation. 
+     So make sure to include your name as part of the screenTitle -->
+<title>Naruto vs Jiraya</title>
+<maxStringSize>50</maxStringSize>
+
+<frameCapOn>true</frameCapOn>
+<period>17</period>
+
+<maxFrames>300</maxFrames>
+<username>cccochr</username>
+
+<view>
+  <width>2000</width>
+  <height>1400</height>
+</view>
+
+<world>
+  <width>2000</width>
+  <height>1400</height>
+</world>
+
+<foreground>
+  <file>assets/Beatles Background_1.png</file>
+  <factor>1</factor>
+  <transparency>false</transparency>
+  <playerChannels>3</playerChannels>
+  <channelHeight>250</channelHeight>
+</foreground>
+
+<font name="font">
+  <file>fonts/arial.ttf</file>
+  <size>24</size>
+  <red>0</red>
+  <green>0</green>
+  <blue>255</blue>
+  <alpha>0</alpha>
+</font>
+
+<SmartJiraya>
+  <file>assets/Jiraya_multi_4_520_129.png</file>
+  <startLoc x="50" y="1271"/>
+  <frames>4</frames>
+  <imageWidth>130</imageWidth>
+  <imageHeight>129</imageHeight>
+  <frameInterval>75</frameInterval>
+  <speedX>450</speedX>
+  <speedY>0</speedY>
+  <safeDistance>200</safeDistance>
+  <transparency>false</transparency>
+</SmartJiraya>
+
+<SmartJirayaLeft>
+  <file>assets/JirayaLeft_multi_4_520_129.png</file>
+  <startLoc x="50" y="1271"/>
+  <frames>4</frames>
+  <imageWidth>130</imageWidth>
+  <imageHeight>129</imageHeight>
+  <frameInterval>75</frameInterval>
+  <speedX>450</speedX>
+  <speedY>0</speedY>
+  <safeDistance>50</safeDistance>
+  <transparency>false</transparency>
+</SmartJirayaLeft>
+
+<Naruto>
+  <file>assets/Naruto_multi_4_448x120.png</file>
+  <startLoc x="50" y="1280"/>
+  <frames>4</frames>
+  <imageWidth>112</imageWidth>
+  <imageHeight>120</imageHeight>
+  <frameInterval>75</frameInterval>
+  <speedX>700</speedX>
+  <speedY>0</speedY>
+  <jumpHeight>200</jumpHeight>
+  <transparency>false</transparency>
+</Naruto>
+
+<NarutoLeft>
+  <file>assets/NarutoLeft_multi_4_448x120.png</file>
+  <startLoc x="50" y="1280"/>
+  <frames>4</frames>
+  <imageWidth>112</imageWidth>
+  <imageHeight>120</imageHeight>
+  <frameInterval>75</frameInterval>
+  <speedX>700</speedX>
+  <speedY>0</speedY>
+  <transparency>false</transparency>
+</NarutoLeft>
+
+<HUD>
+  <width>300</width>
+  <height>300</height>
+  <X>10</X>
+  <Y>10</Y>
+</HUD>
+
+</GameData>
